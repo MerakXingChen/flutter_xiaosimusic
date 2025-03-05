@@ -24,16 +24,10 @@ jobs:
         cache: gradle
 
     - name: 权限
-      run: chmod 777 ./Android/gradlew
+      run: chmod 777 ./android/gradlew
       
     - name: Build with Gradle
-      run: ./Android/gradlew assembleRelease
-
-    - name: 上传
-      run: |
-        TZ='Asia/Shanghai' timestamp=$(date +%Y%m%d%H%M%S)
-        new_filename="Phecda-${timestamp}.apk"
-        curl -T ${{ github.workspace }}/app/build/outputs/apk/release/*.apk http://nas.merak.xin/dav/${new_filename} --user web:831121
+      run: ./android/gradlew assembleRelease
 
     - name: Upload GitHub Actions artifact of vcpkg build
       uses: actions/upload-artifact@v4
