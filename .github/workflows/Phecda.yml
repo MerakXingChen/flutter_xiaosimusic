@@ -26,8 +26,10 @@ jobs:
     - name: 权限
       run: chmod 777 ./android/gradlew
       
-    - name: Build with Gradle
+    - name: CD Gradle      
       run: cd android
+      
+    - name: Build with Gradle
       run: ./gradlew assembleRelease
 
     - name: Upload GitHub Actions artifact of vcpkg build
