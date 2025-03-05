@@ -4,10 +4,16 @@ pluginManagement {
         file("local.properties").withInputStream { properties.load(it) }
         def flutterSdkPath = properties.getProperty("flutter.sdk")
         assert flutterSdkPath != null, "flutter.sdk not set in local.properties"
+        // 将反斜杠替换为正斜杠
+        flutterSdkPath = flutterSdkPath.replace('\\', '/') 
         return flutterSdkPath
     }()
 
-    includeBuild("$flutterSdkPath/packages/flutter_tools/gradle")
+    def flutterToolsGradlePath = "$flutterSdkPath/packages/flutter_tools/gradle"
+    if (!file(flutterToolsGradlePath).exists()) {
+        throw new GradleException("Path $flutterToolsGradlePath does not exist.")
+    }
+    includeBuild(flutterToolsGradlePath)
 
     repositories {
         google()
