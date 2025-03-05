@@ -16,12 +16,6 @@ jobs:
       with:
         ref: main
 
-    - uses: nttld/setup-ndk@v1
-      id: setup-ndk
-      with:
-        ndk-version: r23b
-        add-to-path: false
-
     - name: set up JDK 11
       uses: actions/setup-java@v2
       with:
@@ -30,7 +24,7 @@ jobs:
         cache: gradle
 
     - name: 权限
-      run: chmod 777 /Android/gradlew
+      run: chmod 777 ./Android/gradlew
       
     - name: Build with Gradle
       run: ./Android/gradlew assembleRelease
