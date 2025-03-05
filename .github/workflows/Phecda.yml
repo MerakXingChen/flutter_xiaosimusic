@@ -27,9 +27,7 @@ jobs:
       run: chmod 777 ./android/gradlew
       
     - name: Build with Gradle
-      run: 
-      cd android
-      ./gradlew assembleRelease
+      run: ["cd android", "./gradlew assembleRelease"]
 
     - name: Upload GitHub Actions artifact of vcpkg build
       uses: actions/upload-artifact@v4
