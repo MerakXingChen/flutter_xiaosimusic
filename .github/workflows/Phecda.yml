@@ -2,15 +2,13 @@ name: Android CI(Phecda)
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
       with:
@@ -23,14 +21,13 @@ jobs:
         distribution: 'adopt'
         cache: gradle
 
-    - name: 权限
-      run: chmod 777 ./android/gradlew
-      
     - name: Build with Gradle
-      run: ["cd android", "./gradlew assembleRelease"]
+      run: |
+        cd android
+        ./gradlew assembleRelease
 
     - name: Upload GitHub Actions artifact of vcpkg build
       uses: actions/upload-artifact@v4
       with:
         name: scene-dev
-        path: ${{ github.workspace }}/app/build/outputs/apk/release/*.apk
+        path: ${{ github.workspace }}/android/app/build/outputs/apk/release/*.apk
